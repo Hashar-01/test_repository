@@ -76,24 +76,38 @@ class linkedList:
         return self
         
     def __next__(self):
-        if self.iterStart:
-            self.iterStart=False
+        #if self.iterStart:
+            #self.iterStart=False
             #self.currentNode=self.head
+        #else:
+        if self.head==None:
+            return("Empty Linked List")
         else:
-            if self.head==None:
-                print("Empty Linked List")
+            #print(self.head.val)
+            #currentNode=self.head
+            #print(self.currentNode.val)
+            if self.currentNode is not None:
+                value=self.currentNode.val
+                self.currentNode=self.currentNode.next
+                return value
+                
             else:
-                #print(self.head.val)
-                #currentNode=self.head
-                #print(self.currentNode.val)
-                if self.currentNode is not None:
-                    value=self.currentNode.val
-                    self.currentNode=self.currentNode.next
-                    return value
+                #self.iterStart=True
+                raise StopIteration
                     
-                else:
-                    self.iterStart=True
-                    raise StopIteration
+    def deleteEl(self,value):
+        currentNode=self.head
+        if currentNode.val==value:
+            self.head=currentNode.next
+            del(currentNode)
+            return True
+        else:
+            while currentNode.next is not None:
+                if currentNode.next.val==value:
+                    currentNode.next=currentNode.next.next
+                    return True
+                currentNode=currentNode.next
+            return False  #when not in list
 LList=linkedList()
 #print(LList.head)
 for i in range(50,0,-2):
@@ -103,6 +117,11 @@ for i in range(1,10):
 LList.sort()
 #LList.PrintList()
 print("minimum num: ",LList.min())
+for value in LList:
+    print(value)
+print("----------------------------------")
+n=int(input("enter a value to delete from Linked List:  "))
+print(LList.deleteEl(n))
 for value in LList:
     print(value)
 
