@@ -34,17 +34,6 @@ class linkedList:
             currentNode.next=newNode
         # insert at any position
         
-    def EndInsert(self,value):
-        
-        tempNode= node(value)
-        
-        if self.head is None:
-            self.head=tempNode
-            self.tail=tempNode
-        else:
-            self.tail.next=tempNode
-            self.tail=tempNode
-        
         
     def PrintList(self):
         if self.head==None:
@@ -56,6 +45,7 @@ class linkedList:
                 print(currentNode.val)
                 currentNode=currentNode.next
             
+    #incomplete
     def sort(self):
         currentNode=self.head
         while currentNode.next is not None:
@@ -81,7 +71,9 @@ class linkedList:
             #self.currentNode=self.head
         #else:
         if self.head==None:
+            raise StopIteration
             return("Empty Linked List")
+            
         else:
             #print(self.head.val)
             #currentNode=self.head
@@ -98,16 +90,30 @@ class linkedList:
     def deleteEl(self,value):
         currentNode=self.head
         if currentNode.val==value:
+            if currentNode==self.tail:
+                self.tail=None
             self.head=currentNode.next
             del(currentNode)
             return True
         else:
             while currentNode.next is not None:
                 if currentNode.next.val==value:
+                    if currentNode.next==self.tail:
+                        self.tail=currentNode
                     currentNode.next=currentNode.next.next
                     return True
                 currentNode=currentNode.next
             return False  #when not in list
+    #deleting entire Linked List
+    def deleteL(self):
+        if self.head is None and self.tail is None:
+            return False
+        else:
+            self.head=None
+            self.tail=None
+            
+            
+    
 LList=linkedList()
 #print(LList.head)
 for i in range(50,0,-2):
@@ -120,8 +126,27 @@ print("minimum num: ",LList.min())
 for value in LList:
     print(value)
 print("----------------------------------")
-n=int(input("enter a value to delete from Linked List:  "))
-print(LList.deleteEl(n))
-for value in LList:
+#n=int(input("enter a value to delete from Linked List:  "))
+#print(LList.deleteEl(n))
+#for value in LList:
+    #print(value)
+
+llist2=linkedList()
+llist2.insert(1,-1)
+for value in llist2:
     print(value)
+llist2.deleteEl(1)
+for value in llist2:
+    print(value)
+
+print(llist2.tail)
+print("-------------------------------------")
+LList.__iter__()
+print(next(LList))
+print([i for i in LList])
+print("--------------------- linked list deletion ----------------")
+LList.deleteL()
+print([i for i in LList])
+
+print("\n"*3)
 
